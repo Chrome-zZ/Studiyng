@@ -1,4 +1,8 @@
 package org.example.simple.model;
 
-public class Qualification {
+public enum Qualification {
+    SEAMSTRESS,
+    CUTTER,
+    DESIGNER,
+    ADMINISTRATOR
 }
