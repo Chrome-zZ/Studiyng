@@ -1,5 +1,6 @@
 package org.example.simple.controller;
 
+import org.example.simple.dto.AuthenticationRequestDTO;
 import org.example.simple.model.User;
 import org.example.simple.repo.UserRepo;
 import org.example.simple.security.JwtTokenProvider;

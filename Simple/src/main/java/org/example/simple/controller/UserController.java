@@ -7,7 +7,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/users")
@@ -21,24 +20,25 @@ public class UserController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('write')")
     public List<User> getAll() {
         return userService.getUsers();
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('users:read')")
-    public Optional<User> getUserById(@PathVariable("id") Long id) {
+    @PreAuthorize("hasAuthority('read')")
+    public User getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('users:write')")
-    public User addUser(@RequestBody User user){
+//    @PreAuthorize("hasAuthority('read')") //idk if it's necessary
+    public User addUser(@RequestBody User user) {
         return userService.addUser(user);
     }
 
     @PostMapping("/delete/{id}")
-    @PreAuthorize("hasAuthority('users:write')")
+    @PreAuthorize("hasAuthority('write')")
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
     }

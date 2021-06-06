@@ -1,4 +1,4 @@
-package org.example.simple.controller;
+package org.example.simple.dto;
 
 
 import lombok.Data;
