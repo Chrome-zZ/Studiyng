@@ -1,7 +1,6 @@
 package org.example.testTask.controller;
 
 import org.example.testTask.model.User;
-import org.example.testTask.repository.MessageRepository;
 import org.example.testTask.repository.UserRepository;
 import org.example.testTask.security.JwtTokenProvider;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,13 +15,10 @@ public class UserController {
 
     private final JwtTokenProvider jwtTokenProvider;
     private final UserRepository userRepository;
-    private final MessageRepository messageRepository;
 
-    public UserController(JwtTokenProvider jwtTokenProvider, UserRepository userRepository,
-                          MessageRepository messageRepository) {
+    public UserController(JwtTokenProvider jwtTokenProvider, UserRepository userRepository) {
         this.jwtTokenProvider = jwtTokenProvider;
         this.userRepository = userRepository;
-        this.messageRepository = messageRepository;
     }
 
     @GetMapping

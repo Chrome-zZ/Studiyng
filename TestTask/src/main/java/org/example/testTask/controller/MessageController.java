@@ -6,6 +6,7 @@ import org.example.testTask.repository.MessageRepository;
 import org.example.testTask.repository.UserRepository;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +46,7 @@ public class MessageController {
 
     //обработка сообщения для ws
     @MessageMapping("/chat")
+    @SendTo("chat/messages")
     public void processMessage(@Payload MessageDTO messageDTO) {
         String login = messageDTO.getName();
         if (messageDTO.getMessage().contains("auth")) {

@@ -1,6 +1,7 @@
 package org.example.testTask.controller;
 
 import org.example.testTask.dto.AuthenticationRequestDTO;
+import org.example.testTask.model.User;
 import org.example.testTask.repository.UserRepository;
 import org.example.testTask.security.JwtTokenProvider;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,8 +26,8 @@ import java.util.Map;
 public class AuthenticationRestController {
 
     private final AuthenticationManager authenticationManager;
-    private final UserRepository userRepository;
-    private final JwtTokenProvider jwtTokenProvider;
+    private UserRepository userRepository;
+    private JwtTokenProvider jwtTokenProvider;
 
     public AuthenticationRestController(AuthenticationManager authenticationManager, UserRepository userRepository,
                                         JwtTokenProvider jwtTokenProvider) {
@@ -39,8 +41,8 @@ public class AuthenticationRestController {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken
                     (request.getLogin(), request.getPassword()));
-//            User user = userRepository.findByLogin(request.getLogin()).orElseThrow(() ->
-//                    new UsernameNotFoundException("User doesn't exists"));
+            User user = userRepository.findByLogin(request.getLogin()).orElseThrow(() ->
+                    new UsernameNotFoundException("User doesn't exists"));
             String token = jwtTokenProvider.createToken(request.getLogin());
             Map<Object, Object> response = new HashMap<>();
             response.put("token", token);

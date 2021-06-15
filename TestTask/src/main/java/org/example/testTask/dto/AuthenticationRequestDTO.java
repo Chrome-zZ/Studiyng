@@ -1,6 +1,5 @@
 package org.example.testTask.dto;
 
-
 import lombok.Data;
 
 @Data
