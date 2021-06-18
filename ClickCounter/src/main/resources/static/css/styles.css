@@ -1,0 +1,33 @@
+.main {
+    width: 145px;
+    height: 105px;
+    background-color: #edecea;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    align-items: stretch;
+}
+
+.left {
+    width: 100%;
+}
+
+.new-message output{
+    width: 120px;
+    height: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.new-message button {
+    background-color: #f45d37;
+    color: #ffffff;
+    padding: 15px 30px;
+    border: 0;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
